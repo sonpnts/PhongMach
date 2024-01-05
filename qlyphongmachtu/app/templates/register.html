@@ -1,0 +1,45 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Đăng ký{% endblock %}
+
+{% block content %}
+
+{% if err_msg %}
+<div class="alert alert-danger">
+    {{ err_msg }}
+</div>
+{% endif %}
+
+<div class="container col-md-6 mx-auto">
+
+    <form method="post" action="/register">
+        <div class=" mb-3 mt-3">
+            <label for="name">Tên người dùng</label>
+            <input type="text" class="form-control" id="name" placeholder="Tên người dùng" name="name" required>
+        </div>
+        <div class=" mb-3 mt-3">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Email" name="email" required>
+        </div>
+        <div class=" mt-3 mb-3">
+            <label for="password">Mật khẩu</label>
+            <input type="password" class="form-control" id="password" placeholder="Mật khẩu" name="password" required>
+        </div>
+        <div class=" mt-3 mb-3">
+            <label for="confirm">Xác nhận mật khẩu</label>
+            <input type="password" class="form-control" id="confirm" placeholder="Xác nhân mật khẩu" name="confirm"
+                   required>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <div class="form-floating mt-3 mb-3">
+                <button type="submit" class="btn btn-danger">Đăng ký</button>
+            </div>
+            <div class="mt-3">
+                <button type="button" class="btn btn-danger">
+                    <i class="bi bi-google fab fa-google-plus-g"></i> Đăng ký bằng google</i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Đăng ký{% endblock %}
+
+{% block content %}
+<div class=" container col-md-6 mx-auto mt-3">
+    {% if current_user.is_authenticated %}
+    {% if err_msg %}
+    <div class="alert alert-danger">
+        {{ err_msg }}
+    </div>
+    {% endif %}
+    <form method="post" action="{{url_for('update', user_id=current_user.id)}}" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Họ và tên</label>
+            <input type="text" class="form-control" id="name" placeholder="{{current_user.name}}" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="{{current_user.email}}" disabled>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="diaChi" class="form-label">Địa chỉ</label>
+            {% if current_user.diaChi %}
+            <input type="text" class="form-control" id="diaChi" value="{{ current_user.diaChi }}" disabled>
+            {% else %}
+            <input type="text" class="form-control" id="diaChi" placeholder="Nhập địa chỉ của bạn" required>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="namSinh" class="form-label">Năm sinh</label>
+            {% if current_user.namSinh %}
+            <input type="text" class="form-control" id="namSinh" value="{{ current_user.namSinh }}" disabled>
+            {% else %}
+            <input type="text" class="form-control" id="namSinh" placeholder="Nhập năm sinh của bạn" required>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="sdt" class="form-label">Số điện thoại</label>
+            {% if current_user.sdt %}
+            <input type="tel" class="form-control" id="sdt" value="{{ current_user.sdt }}" disabled>
+            {% else %}
+            <input type="tel" class="form-control" id="sdt" placeholder="Nhập số điện thoại của bạn" required>
+            {% endif %}
+        </div>
+        <div class="mb-3" style="display: flex;">
+            <label for="avatar" class="form-label">Avatar</label>
+            <img width="250px" class="img-rounder" src="{{ current_user.avatar }}">
+            <input type="file" class="form-control" id="avatar">
+        </div>
+
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
+        </div>
+    </form>
+    {% endif %}
+
+
+</div>
+
+{% endblock %}
