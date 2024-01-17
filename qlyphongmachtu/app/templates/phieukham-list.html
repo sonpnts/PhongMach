@@ -1,0 +1,43 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+{% if current_user.is_authenticated and current_user.type=='cashier' %}
+<div class="container mt-5">
+    <div>
+        <h1>Danh sách lên hóa hơn</h1>
+    </div>
+    <div class="danger alert-danger" id="message-container"></div>
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Bênh nhân</th>
+                <th>Tên thuốc</th>
+                <th>Số lượng</th>
+                <th>Tiền thuốc</th>
+                <th>Tiền khám</th>
+                <th>Tổng tiền</th>
+                <th scope="col">Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in lapphieukham %}
+<!--            <input type="text" value="{{p[4]}}" id="p_id" class="d-none">-->
+            <tr>
+                <td >{{ p[0]}}</td>
+                <td>{{ p[1] }}</td>
+                <td>{{ p[2] }}</td>
+                <td id="tienThuoc">{{ p[3] }}</td>
+                <td>{{ tienkham }}</td>
+                <td id="tongtien">{{ p[3] + tienkham}}</td>
+                <td>
+                    <button class="book-btn" onclick="thanhToan({{p4 ,p[3] + tienkham}})">Thanh toán</button>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock%}

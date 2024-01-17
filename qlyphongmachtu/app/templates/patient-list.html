@@ -1,0 +1,64 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+{% if current_user.is_authenticated and current_user.type=='doctor' %}
+<div class="container">
+    <form class="d-flex" method="get">
+        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa...">
+        <button class="btn btn-primary me-2" type="submit">Search</button>
+        <a href="/patient-list" class="btn btn-danger">All</a>
+    </form>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Giới tính</th>
+            <th>Năm sinh</th>
+            <th>Địa chỉ</th>
+            <th>Lên lịch</th>
+            <th>Ngày Đặt</th>
+        </tr>
+        {% for b in books %}
+        <tr>
+            {% if b.isKham == False and b.lenLichKham == True and b.booked_date == date %}
+            <td>
+                {% for p in patient %}
+                {% if p.id == b.patient_id %}
+                {{ p.name }}
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                {% for p in patient %}
+                {% if p.id == b.patient_id %}
+                {{ p.gioiTinh }}
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                {% for p in patient %}
+                {% if p.id == b.patient_id %}
+                {{ p.namSinh }}
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                {% for p in patient %}
+                {% if p.id == b.patient_id %}
+                {{ p.diaChi }}
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ b.lenLichKham }}</td>
+            <td>{{ b.booked_date }}</td>
+            <td>
+                <a href="/books/{{b.id}}" class="btn btn-primary"
+                        data-book-id="{{ b.id }}" onclick="lenphieukham(this.getAttribute('data-book-id'))">Lập phiếu khám
+                </a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+{% endblock %}

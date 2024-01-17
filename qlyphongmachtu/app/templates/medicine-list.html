@@ -1,0 +1,27 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<div class="container">
+    <form class="d-flex" method="get">
+        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa...">
+        <button class="btn btn-primary me-2" type="submit">Search</button>
+        <a href="/admin/allmedicinemodelview" class="btn btn-danger">All</a>
+    </form>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Unit</th>
+            <th>Price</th>
+            <th>Usage</th>
+        </tr>
+        {% for m in medicine %}
+        <tr>
+            <td>{{ m.name }}</td>
+            <td>{{ m.unit }}</td>
+            <td>{{ m.price }} VNĐ</td>
+            <td>{{ m.usage }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+{% if current_user.is_authenticated and current_user.type=='cashier' %}
+<div class="container mt-5">
+    <div>
+        <h1 class="text-center text-danger">THANH TOÁN</h1>
+    </div>
+    <div class="section-center">
+        <div class="container">
+            <div class="row">
+                <div class="booking-form">
+                    <form id="bookForm" name="bookForm">
+                        <!--                        method='post' action="/create-receipt" -->
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <span class="form-label">Bệnh nhân</span>
+                                    {% for l in lapphieukham %}
+<!--                                    <input value="{{ l[4] }}" disabled class="d-none" name="patient_id"-->
+<!--                                           id="patientId"></input>-->
+                                    <span class="form-label" name="medicine_name" id="medicineId">
+                                        {% if l[4] == p %}
+                                            {{ l[0] }}
+                                        {% endif %}
+                                    </span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-label">Tiền thuốc</span>
+                                {% for l in lapphieukham %}
+                                {% if l[4] == p %}
+                                <input class="form-label" disabled value="{{ l[3] }}" name="medicinepriceId"
+                                       id="medicinepriceId">
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="form-group">
+                                <span class="form-label">Tiền khám</span>
+                                <input class="form-label" disabled value="{{ tienkham }}" name="examinespriceId"
+                                       id="examinespriceId">
+
+                            </div>
+                            <div class="form-group">
+                                <span class="form-label">Tổng tiền</span>
+                                {% for l in lapphieukham %}
+                                {% if l[4] == p %}
+                                <input value="{{ l[3] + tienkham}}" disabled class="form-label" name="totalId"
+                                       id="totalId">
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <input id="p_id" value="{{p}}">
+                            <div class="d-flex justify-content-center">
+                                <button onclick="addReceipt()"  class="btn btn-primary">Xác nhận thanh
+                                    toán
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock%}

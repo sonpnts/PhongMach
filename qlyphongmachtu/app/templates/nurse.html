@@ -1,0 +1,51 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+    {% if current_user.is_authenticated and current_user.type=='nurse' %}
+        <div class="container mt-5">
+            <div class="d-flex justify-content-between">
+                <h1>Danh sách bệnh nhân hôm nay</h1>
+                <button class="book-btn btn btn-primary" type="button" onclick="window.location.href='/book-offline'">Đăng ký lịch khám cho bệnh nhân</button>
+            </div>
+            <div class="danger alert-danger" id="message-container"></div>
+            <table class="table table-striped mt-3">
+                <thead>
+                <tr>
+                    <th scope="col">Họ và tên</th>
+                    <th scope="col">Giờ đặt lịch</th>
+                    <th scope="col">Mô tả bệnh</th>
+                    <th scope="col">Thao tác</th>
+                    <th></th>
+
+                </tr>
+                </thead>
+                <tbody >
+                {% for b in books %}
+                    <tr>
+                        {% if b.lenLichKham==False and b.booked_date == date %}
+
+                            <td>
+                                {% for p in patient %}
+                                    {% if p.id == b.patient_id %}
+                                        {{ p.name }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+
+                            <td>{{ b.time }}</td>
+                            <td>{{ b.desc }}</td>
+                            <td>
+                                <button class="book-btn btn btn-success" data-book-id="{{ b.id }}" onclick="lenlich(this.getAttribute('data-book-id'))">
+                                    Lên danh sách khám
+                                </button>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}
+

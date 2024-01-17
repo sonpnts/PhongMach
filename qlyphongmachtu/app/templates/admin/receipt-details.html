@@ -1,0 +1,36 @@
+{% extends 'admin/master.html '%}
+
+{% block body %}
+<h1 class="text-danger"> CHI TIẾT HÓA ĐƠN CỦA BỆNH NHÂN</h1>
+
+<!--<form action="/admin/getdetailview/">-->
+<!--    <label for="namepatient">Nhập Tên bệnh nhân:</label>-->
+<!--    <input type="text" id="namepatient" name="namepatient"><br><br>-->
+<!--    <input type="submit" value="Xem chi tiết hóa đơn">-->
+<!--</form>-->
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Tên thuốc</th>
+            <th>Số lượng</th>
+            <th>Giá tiền</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for p in receipt_details %}
+        <tr>
+            <td>{{ p[0]}}</td>
+            <td>{{ p[1] }}</td>
+            <td>{{ p[2] }}</td>
+            <td>{{ "{:,.0f}".format(p[3]) }} VNĐ </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

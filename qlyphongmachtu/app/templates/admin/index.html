@@ -1,0 +1,46 @@
+{% extends 'admin/master.html' %}
+
+{% block title %}Clinic - Admin{% endblock %}
+
+{% block body %}
+
+{% if current_user.is_authenticated %}
+<h1 class="text-center text-info">CHÀO MỪNG ĐẾN TRANG QUẢN TRỊ !!!</h1>
+<h2 class="text-danger">Chào {{current_user.name}}</h2>
+
+<div class="row">
+    <div class="col-md-5">
+        <div>
+            <h2 class="d-inline-block text-uppercase text-primary h1 font-weight-bold">ADMIN DASHBOARD</h2>
+             <p class="lead">Welcome to the admin dashboard. Manage your hospital's operations, track appointments, and access important data.</p>
+             <p>Feel free to explore the various features and functionalities available to you.</p>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <img class=""
+             src="https://scontent.xx.fbcdn.net/v/t1.15752-9/411193524_335729605928040_7056225036583314143_n.png?_nc_cat=107&ccb=1-7&_nc_sid=510075&_nc_eui2=AeFiKSkszA2pnCqjru3Zj_MH10bEFLpJ3h7XRsQUukneHs7DmVCPgsT33NS3iTlpvbXDXbuMneSEU6tptAMk1vx-&_nc_ohc=xs2Ob0Qa3hMAX8cJINV&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdSnf4M8AnyzkyKxssqLXKpdYSv8YJYa5MebNsXV6GXpig&oe=65BB97BD"
+             alt="doctors">
+    </div>
+</div>
+{% else %}
+<h1 class="text-center text-info">ĐĂNG NHẬP QUẢN TRỊ</h1>
+<form method="post" action="/admin/login">
+    <div class="mb-3 mt-3">
+        <label for="email">Tên đăng nhập</label>
+        <input type="text" class="form-control" id="email"
+               name="email" placeholder="Tên đăng nhập" required>
+    </div>
+
+    <div class="mt-3 mb-3">
+        <label for="password">Mật khẩu</label>
+        <input type="password" class="form-control" id="password"
+               name="password" placeholder="Mật khẩu" required>
+    </div>
+
+    <div class="form-floating mt-3 mb-3">
+        <button type="submit" class="btn btn-danger">Đăng nhập</button>
+    </div>
+</form>
+{% endif %}
+
+{% endblock %}

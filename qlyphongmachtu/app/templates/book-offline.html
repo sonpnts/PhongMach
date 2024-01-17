@@ -1,0 +1,70 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Đăng ký{% endblock %}
+
+{% block content %}
+
+    {% if err_msg %}
+        <div class="alert alert-danger">
+            {{ err_msg }}
+        </div>
+    {% endif %}
+
+    <div class="container col-md-6 mx-auto">
+        <form method="post" action="/book-offline">
+            <div class=" mb-3 mt-3">
+                <label for="name">Tên bệnh nhân</label>
+                <input type="text" class="form-control" id="name" placeholder="Tên bệnh nhân" name="name" required>
+            </div>
+
+            <div class=" mt-3 mb-3">
+                <label for="sdt">Số điện thoại</label>
+                <input type="text" class="form-control" id="sdt" placeholder="Số điện thoại" name="sdt"
+                       required>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="diaChi" class="form-label">Địa chỉ</label>
+
+                <input type="text" class="form-control" id="diaChi" name="diaChi" placeholder="Nhập địa chỉ của bạn"
+                       required>
+
+            </div>
+            <div class="mb-3">
+                <label for="namSinh" class="form-label">Năm sinh</label>
+
+                <input type="date" class="form-control" id="namSinh" name="namSinh" placeholder="Nhập năm sinh của bạn"
+                       required>
+
+            </div>
+            <div class="mb-3">
+                <label for="gioiTinh" class="form-label">Giới tính</label>
+
+                <select class="form-select" id="gioiTinh" name="gioiTinh">
+                    <option value="nam">Nam</option>
+                    <option value="nu">Nữ</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <span class="form-label">Mô tả bệnh</span>
+               <input type="text" class="form-control" id="desc" name="desc" placeholder="Mô tả bệnh"
+                       required>
+            </div>
+            <div class="form-group mt-3">
+                <label class="form-label">Chọn thời gian:</label>
+                <select name="timeId" id="timeId">
+                    {% for t in time %}
+                        <option value="{{ t.id }}"> {{ t.period }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <div class="form-floating mt-3 mb-3">
+                    <button type="submit" class="btn btn-danger">Đăng ký</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

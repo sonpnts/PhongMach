@@ -1,0 +1,50 @@
+{% extends 'admin/master.html' %}
+
+
+{% block body %}
+
+
+<div class="container mt-5">
+    <form class="d-flex" method="get">
+        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa...">
+        <button class="btn btn-primary me-2" type="submit">Search</button>
+        <a href="/admin/allpatientmodelview" class="btn btn-danger">All</a>
+    </form>
+    <h1>Danh sách bệnh nhân hôm nay</h1>
+    <div class="danger alert-danger" id="message-container"></div>
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th scope="col">Họ và tên</th>
+            <th scope="col">Giờ đặt lịch</th>
+            <th scope="col">Thao tác</th>
+
+        </tr>
+        </thead>
+        <tbody id="update">
+        {% for b in books %}
+        <tr>
+            {% if b.lenLichKham==False and b.booked_date == date %}
+            <td>
+                {% for p in patient %}
+                {% if p.id == b.patient_id %}
+                {{ p.name }}
+                {% endif %}
+                {% endfor %}
+            </td>
+
+            <td>{{ b.time }}</td>
+            <td>
+                <button data-book-id="{{ b.id }}" onclick="lenlich(this.getAttribute('data-book-id'))">Lên
+                    danh sách khám
+                </button>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
